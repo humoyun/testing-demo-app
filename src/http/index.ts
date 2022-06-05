@@ -29,40 +29,64 @@ export default class Http {
     this.needAuth = needAuth;
   }
 
-  get<T>(path: string, query?: StringifiableRecord): Promise<T> {
-    return this.execute<T>(HTTP_METHODS.GET, path, undefined, query);
+  get<T>({
+    path,
+    query,
+  }: {
+    path: string;
+    query?: StringifiableRecord;
+  }): Promise<T> {
+    return this.execute<T>({
+      method: HTTP_METHODS.GET,
+      path,
+      data: undefined,
+      query,
+    });
   }
 
-  post<T>(
-    path: string,
-    data: Payload,
-    query?: StringifiableRecord
-  ): Promise<T> {
-    return this.execute<T>(HTTP_METHODS.POST, path, data, query);
+  post<T>({
+    path,
+    data,
+    query,
+  }: {
+    path: string;
+    data: Payload;
+    query?: StringifiableRecord;
+  }): Promise<T> {
+    return this.execute<T>({ method: HTTP_METHODS.POST, path, data, query });
   }
 
-  put<T>(path: string, data: Payload): Promise<T> {
-    return this.execute<T>(HTTP_METHODS.PUT, path, data);
+  put<T>({ path, data }: { path: string; data: Payload }): Promise<T> {
+    return this.execute<T>({ method: HTTP_METHODS.PUT, path, data });
   }
 
-  patch<T>(
-    path: string,
-    data?: Payload,
-    query?: StringifiableRecord
-  ): Promise<T> {
-    return this.execute<T>(HTTP_METHODS.PATCH, path, data, query);
+  patch<T>({
+    path,
+    data,
+    query,
+  }: {
+    path: string;
+    data?: Payload;
+    query?: StringifiableRecord;
+  }): Promise<T> {
+    return this.execute<T>({ method: HTTP_METHODS.PATCH, path, data, query });
   }
 
   delete<T>(path: string): Promise<T> {
-    return this.execute<T>(HTTP_METHODS.DELETE, path);
+    return this.execute<T>({ method: HTTP_METHODS.DELETE, path });
   }
 
-  execute<T>(
-    method: HTTP_METHODS,
-    path: string,
-    data?: Payload,
-    query?: StringifiableRecord
-  ): Promise<T> {
+  execute<T>({
+    method,
+    path,
+    data,
+    query,
+  }: {
+    method: HTTP_METHODS;
+    path: string;
+    data?: Payload;
+    query?: StringifiableRecord;
+  }): Promise<T> {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
     };
@@ -111,6 +135,6 @@ export default class Http {
   }
 }
 
-const originApi = new Http('replace-with-base-url', true);
+const originApi = new Http('https://jsonplaceholder.typicode.com', true);
 
 export { originApi };

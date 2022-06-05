@@ -1,3 +1,5 @@
-export default function Home(): JSX.Element {
-  return <div>Home</div>;
-}
+const Login = (): JSX.Element => {
+  return <div>Login</div>;
+};
+
+export default Login;
