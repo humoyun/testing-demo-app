@@ -1,5 +1,5 @@
 const TextInput = (): JSX.Element => {
-  return <div></div>;
+  return <input></input>;
 };
 
 export default TextInput;
