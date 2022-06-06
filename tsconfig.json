@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "build",
+    "paths": {
+      "@/utils/*": ["src/utils/*"]
+    },
     "downlevelIteration": true,
     "resolveJsonModule": true,
     "jsx": "react-jsx",
@@ -24,7 +29,6 @@
     "noEmit": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src", "scripts"],
-  "exclude": [".dev", "dist", "node_modules", "*.js"],
-  "extends": "./tsconfig.paths.json"
+  "include": ["src"],
+  "exclude": [".dev", "dist", "node_modules", "*.js"]
 }

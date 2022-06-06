@@ -20,13 +20,13 @@ export enum HTTP_METHODS {
 
 type Payload = Record<string, unknown>;
 
-export default class Http {
+class Http {
   private readonly baseUrl: string;
-  private needAuth: boolean;
+  private needAuth?: boolean;
 
-  constructor(baseUrl: string, needAuth: boolean) {
+  constructor(baseUrl: string, needAuth?: boolean) {
     this.baseUrl = baseUrl;
-    this.needAuth = needAuth;
+    this.needAuth = needAuth || false;
   }
 
   get<T>({
@@ -126,6 +126,7 @@ export default class Http {
           logNetworkError(fullPath, status, message);
           throw new NetworkError({ status, message, response });
         }
+        // not error, just not modified
         if (response.status === 204) {
           return null;
         }
@@ -135,6 +136,6 @@ export default class Http {
   }
 }
 
-const originApi = new Http('https://jsonplaceholder.typicode.com', true);
+const baseApi = new Http('https://jsonplaceholder.typicode.com', false);
 
-export { originApi };
+export default baseApi;
