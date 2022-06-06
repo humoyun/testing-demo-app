@@ -1,24 +1,12 @@
-import { useEffect, useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from 'react';
 
-import { Flexbox } from 'src/components/Alignments';
-import Button from 'src/components/Button';
-import TextInput from 'src/components/TextInput';
-import Post, { PostScheme } from 'src/features/posts/Post';
-import baseApi from 'src/http';
+import { Flexbox } from 'src/components/alignments';
+import Button from 'src/components/button';
+import TextInput from 'src/components/text-input';
+import PostList from 'src/features/posts';
 
 const Home = (): JSX.Element => {
-  const [posts, setPosts] = useState<PostScheme[]>([]);
   const [search, setSearch] = useState<string>('');
-
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const resp = await baseApi.get<PostScheme[]>({ path: 'posts' });
-
-      setPosts(resp);
-    };
-
-    fetchPosts();
-  }, []);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -36,11 +24,7 @@ const Home = (): JSX.Element => {
         />
         <Button>Search</Button>
       </Flexbox>
-      <Flexbox direction="column" style={{ rowGap: 10, marginBottom: 20 }}>
-        {posts.map(post => (
-          <Post key={post.id} data={post}></Post>
-        ))}
-      </Flexbox>
+      <PostList />
     </div>
   );
 };

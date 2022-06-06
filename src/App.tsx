@@ -1,4 +1,4 @@
-import { Flexbox } from './components/Alignments';
+import { Flexbox } from './components/alignments';
 import Home from './pages/Home';
 
 const App = (): JSX.Element => {
