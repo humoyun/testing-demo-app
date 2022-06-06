@@ -3,6 +3,10 @@ import userEvent from '@testing-library/user-event';
 
 import TextInput from './';
 
+/**
+ * @see https://testing-library.com/docs/example-input-event
+ */
+
 const setup = () => {
   const onChange = jest.fn();
   const utils = render(<TextInput onChange={onChange} />);

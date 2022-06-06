@@ -1,5 +1,5 @@
 const Search = (): JSX.Element => {
-  return <div></div>;
+  return <div>Search</div>;
 };
 
 export default Search;
