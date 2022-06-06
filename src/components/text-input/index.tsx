@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 import styled from 'styled-components';
 
@@ -19,6 +19,7 @@ const TextInput = ({
   onChange,
   disabled,
 }: Props): JSX.Element => {
+  // const [val, setVal] = useState();
   return (
     <StyledInput
       value={value}
@@ -26,7 +27,9 @@ const TextInput = ({
       type={type}
       placeholder={placeholder}
       disabled={disabled}
-    ></StyledInput>
+      data-testid="custom-text-input"
+      aria-label="custom-input"
+    />
   );
 };
 
