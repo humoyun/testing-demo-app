@@ -1,5 +1,11 @@
+import TextInput from '@/components/text-input';
+
 const Search = (): JSX.Element => {
-  return <div>Search</div>;
+  return (
+    <div>
+      <TextInput></TextInput>
+    </div>
+  );
 };
 
 export default Search;

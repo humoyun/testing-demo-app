@@ -1,0 +1,79 @@
+name: e2e-test
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - .github/workflows/e2e-test.yml
+      - cypress/**
+      - src/**
+
+jobs:
+  cypress-tests:
+    # needs: some-job # dependency
+    runs-on: ubuntu-latest
+    container:
+      image: cypress/included:9.5.4
+      options: --user 1001
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Cypress run
+        id: cytests
+        uses: cypress-io/github-action@v2
+        # to make it optional uncomment below line
+        # if: contains( steps.msg.outputs.COMMIT_MESSAGE, '--t')
+        env:
+          CYPRESS_CACHE_FOLDER: '${GITHUB_WORKSPACE}/.cypress-cache'
+          REACT_APP_DEPLOYMENT_PHASE: development
+          # CYPRESS_BASE_URL: ${{ github.event.deployment_status.target_url }}
+          # ACTIONS_RUNNER_DEBUG: true
+          # ACTIONS_STEP_DEBUG: true
+        with:
+          start: yarn start
+          wait-on: 'http://localhost:8080'
+          browser: chrome
+          headless: true
+          install: true
+          # config-file: cypress-config.json
+
+      - if: ${{ success() }}
+        name: alert e2e tests success
+        uses: NejcZdovc/comment-pr@v1.1.1
+        with:
+          message: ':white_check_mark: e2e tests succeeded. You can check details in artifacts section of ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          identifier: 'E2E_TEST_SUCCESS_COMMENT'
+          github_token: ${{secrets.GITHUB_TOKEN}}
+
+      - if: ${{ failure() }}
+        name: alert e2e tests failure
+        uses: NejcZdovc/comment-pr@v1.1.1
+        with:
+          message: ':x: e2e tests failed. You can check details in artifacts section of ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          identifier: 'E2E_TEST_FAILURE_COMMENT'
+          github_token: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Upload Cypress artifacts 💾
+        uses: actions/upload-artifact@v2
+        if: steps.cytests.outcome == 'success' || steps.cytests.outcome == 'failure' || failure()
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          name: artifacts_cy_e2e_tests_ctl_#${{ steps.github-context.outputs.RUN_ATTEMPT }}_${{ steps.cytests.outcome }}
+          path: |
+            cypress/screenshots/
+            cypress/videos/
