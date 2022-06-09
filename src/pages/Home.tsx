@@ -13,7 +13,7 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <div style={{ width: '60%' }}>
+    <div style={{ width: '60%', marginTop: 20 }}>
       This is Home
       <Flexbox>
         <TextInput
@@ -22,7 +22,7 @@ const Home = (): JSX.Element => {
           disabled={false}
           placeholder="Enter search..."
         />
-        <Button>Search</Button>
+        <Button style={{ marginLeft: 10 }}>Search</Button>
       </Flexbox>
       <PostList />
     </div>

@@ -1,17 +1,24 @@
-import { PropsWithChildren, MouseEventHandler } from 'react';
+import { PropsWithChildren, MouseEventHandler, CSSProperties } from 'react';
 
 import styled from 'styled-components';
 
 const Button = ({
   children,
   onClick,
+  style = {},
 }: PropsWithChildren<{
   disabled?: boolean;
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  style?: CSSProperties;
 }>): JSX.Element => {
   return (
-    <StyledButton disabled={true} type="button" onClick={onClick}>
+    <StyledButton
+      disabled={true}
+      type="button"
+      onClick={onClick}
+      style={{ ...style }}
+    >
       <span>{children}</span>
     </StyledButton>
   );

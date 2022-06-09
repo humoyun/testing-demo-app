@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "outDir": "build",
     "paths": {
-      "@/utils/*": ["src/utils/*"]
+      "@/utils/*": ["src/utils/*"],
+      "@/components/*": ["src/components/*"]
     },
     "downlevelIteration": true,
     "resolveJsonModule": true,
@@ -29,6 +30,6 @@
     "noEmit": true,
     "noUncheckedIndexedAccess": true
   },
-  "include": ["src"],
+  "include": ["src", "cypress/support/types.d.ts"],
   "exclude": [".dev", "dist", "node_modules", "*.js"]
 }

@@ -44,3 +44,11 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 Need to setup relative path resolving using `tspath` as tsconfig baseUrl is only helpful on compile time, in order to resolve after it is transpiled into JS it cannot resolve TS configs. So please install `tspath`
 
 - https://www.npmjs.com/package/tspath
+
+### Issues encountered while developing:
+
+- regarding adding custom commands into cypress
+  - https://stackoverflow.com/questions/69927966/argument-type-string-is-not-assignable-to-parameter-type-keyof-chainable-in-c
+  - https://github.com/cypress-io/cypress/pull/17496
+  - https://typescript-eslint.io/rules/no-namespace
+- next

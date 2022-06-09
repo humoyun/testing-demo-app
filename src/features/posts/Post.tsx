@@ -23,12 +23,15 @@ const Post = ({ data }: Props): JSX.Element => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
+  border: 1px solid #36fabb;
   padding: 10px 20px;
-  border-radius: 3px;
+  border-radius: 4px;
+  border-left: 5px solid #36fabb;
 
   &:hover {
-    background-color: #ccc;
+    background-color: #e3fff6;
+    transition: 0.2s ease-in;
+    cursor: pointer;
   }
 `;
 
