@@ -52,3 +52,8 @@ Need to setup relative path resolving using `tspath` as tsconfig baseUrl is only
   - https://github.com/cypress-io/cypress/pull/17496
   - https://typescript-eslint.io/rules/no-namespace
 - next
+
+### Useful resources:
+
+- [How to write component tests with Cypress](https://www.youtube.com/watch?v=vJ0rDP4CG-w)
+- [Opening Keynote: Applitools 🤝 Cypress: State of the Union](https://www.youtube.com/watch?v=9IoTirME09E)

@@ -3,6 +3,9 @@
 
 import { mount, MountOptions } from '@cypress/react';
 
+/**
+ * @see https://docs.cypress.io/api/commands/mount#Creating-a-New-cy-mount-Command
+ */
 Cypress.Commands.add(
   'mount',
   (component: React.ReactNode, options?: MountOptions) => {
