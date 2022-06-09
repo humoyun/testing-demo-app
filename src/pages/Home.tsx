@@ -1,32 +1,23 @@
-import { useState, ChangeEvent } from 'react';
+import styled from 'styled-components';
 
-import { Flexbox } from 'src/components/alignments';
-import Button from 'src/components/button';
-import TextInput from 'src/components/text-input';
 import PostList from 'src/features/posts';
+import Search from 'src/features/search';
 
 const Home = (): JSX.Element => {
-  const [search, setSearch] = useState<string>('');
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
-
   return (
-    <div style={{ width: '60%', marginTop: 20 }}>
+    <Container>
       This is Home
-      <Flexbox>
-        <TextInput
-          value={search}
-          onChange={handleChange}
-          disabled={false}
-          placeholder="Enter search..."
-        />
-        <Button style={{ marginLeft: 10 }}>Search</Button>
-      </Flexbox>
+      <Search />
       <PostList />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  width: 60%;
+  margin-top: 20px;
+  flex-direction: column;
+`;
 
 export default Home;
