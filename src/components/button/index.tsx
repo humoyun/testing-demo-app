@@ -2,16 +2,19 @@ import { PropsWithChildren, MouseEventHandler, CSSProperties } from 'react';
 
 import styled from 'styled-components';
 
-const Button = ({
-  children,
-  onClick,
-  style = {},
-}: PropsWithChildren<{
+type Props = PropsWithChildren<{
   disabled?: boolean;
   loading?: boolean;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   style?: CSSProperties;
-}>): JSX.Element => {
+}>;
+
+const Button = ({
+  children,
+  loading,
+  onClick,
+  style = {},
+}: Props): JSX.Element => {
   return (
     <StyledButton
       disabled={true}
@@ -19,7 +22,7 @@ const Button = ({
       onClick={onClick}
       style={{ ...style }}
     >
-      <span>{children}</span>
+      <span>{loading ? 'Loading...' : children}</span>
     </StyledButton>
   );
 };
