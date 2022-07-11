@@ -1,18 +1,6 @@
 /// <reference types="cypress" />
 // ***********************************************
 
-import { mount, MountOptions } from '@cypress/react';
-
-/**
- * @see https://docs.cypress.io/api/commands/mount#Creating-a-New-cy-mount-Command
- */
-Cypress.Commands.add(
-  'mount',
-  (component: React.ReactNode, options?: MountOptions) => {
-    return mount(component, options);
-  }
-);
-
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
 // existing commands.

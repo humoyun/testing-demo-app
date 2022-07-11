@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import TextInput from './';
 
@@ -22,7 +21,7 @@ describe('tests TextInput components', () => {
   test('should render and can be typed into and called', () => {
     const { textInput, onChange } = setup();
     fireEvent.change(textInput, { target: { value: 'some text' } });
-    // userEvent.type(textInput, 'some text');
+
     expect(screen.getByDisplayValue(/some text/)).toBeInTheDocument();
     expect(onChange).toHaveBeenCalled();
   });

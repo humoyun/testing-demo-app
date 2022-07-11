@@ -1,3 +1,5 @@
+/// <reference types="cypress" />
+
 // ***********************************************************
 // This example support/component.ts is processed and
 // loaded automatically before your test files.
@@ -13,15 +15,13 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+import { mount, MountOptions } from '@cypress/react';
 // Import commands.js using ES2015 syntax:
 import './commands';
-
 // endure global styles are imported
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
-
-// import { mount } from 'cypress/react';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
@@ -35,7 +35,17 @@ import './commands';
 //   }
 // }
 
-// Cypress.Commands.add('mount', mount)
+// Cypress.Commands.add('mount', mount);
 
 // Example use:
 // cy.mount(<MyComponent />)
+
+/**
+ * @see https://docs.cypress.io/api/commands/mount#Creating-a-New-cy-mount-Command
+ */
+Cypress.Commands.add(
+  'mount',
+  (component: React.ReactNode, options?: MountOptions) => {
+    return mount(component, options);
+  }
+);

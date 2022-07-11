@@ -1,53 +1,32 @@
-import { useState, useEffect, ChangeEvent, useReducer } from 'react';
+import { useState, ChangeEvent, CSSProperties } from 'react';
 
-import { PostScheme } from 'src/features/posts/Post';
-import { postsSlice } from 'src/features/posts/postsSlice';
-import baseApi from 'src/http';
+import { Flexbox } from 'src/components/alignments';
+import TextInput from 'src/components/text-input';
+import { filterPosts } from 'src/features/posts/postsSlice';
+import { useAppDispatch } from 'src/state/hooks';
 
-import { Flexbox } from '@/components/alignments';
-import Button from '@/components/button';
-import TextInput from '@/components/text-input';
+type Props = {
+  style?: CSSProperties;
+};
 
-const Search = (): JSX.Element => {
+const Search = ({ style }: Props): JSX.Element => {
   const [search, setSearch] = useState<string>('');
-  // const [, dispatch] = useReducer(postsSlice.reducer, []);
-  // const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
-  };
-
-  const fetchPosts = async () => {
-    try {
-      const resp = await baseApi.get<PostScheme[]>({ path: 'posts' });
-      // dispatch({
-      //   type: 'FETCH_POSTS',
-      //   payload: resp,
-      // });
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const handleClick = () => {
-    fetchPosts();
+    dispatch(filterPosts(search));
   };
 
   return (
-    <div>
-      <Flexbox>
-        <TextInput
-          value={search}
-          onChange={handleChange}
-          disabled={false}
-          placeholder="Enter search..."
-        />
-        <Button style={{ marginLeft: 10 }} onClick={handleClick}>
-          Search
-        </Button>
-      </Flexbox>
-    </div>
+    <Flexbox style={{ ...style }}>
+      <TextInput
+        value={search}
+        onChange={handleChange}
+        disabled={false}
+        placeholder="Enter search..."
+      />
+    </Flexbox>
   );
 };
 

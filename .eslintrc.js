@@ -1,11 +1,13 @@
 module.exports = {
   extends: [
     'prettier',
+    'plugin:react-hooks/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
   ],
   plugins: ['import'],
   rules: {
+    'react-hooks/rules-of-hooks': 'error',
     'prefer-destructuring': [
       'error',
       {
@@ -80,5 +82,5 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': ['warn'],
     'no-return-await': 'error',
   },
-  ignorePatterns: ['src/**/public/**/*'],
+  ignorePatterns: ['src/**/public/**/*', 'cypress/**'],
 };
