@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { ClientError, ClientErrorCode } from 'src/http/client-error';
 
 import ErrorPanel from './ErrorPanel';
-import Button from '@/components/Button';
+import Button from '@/components/button';
 
 export const GlobalErrorFallback: ComponentType<
   PropsWithChildren<FallbackProps>

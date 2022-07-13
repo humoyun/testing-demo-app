@@ -1,8 +1,8 @@
 import { useState, SyntheticEvent } from 'react';
 
-import { Flexbox } from '@/components/alignments';
-import Button from '@/components/button';
-import TextInput from '@/components/text-input';
+import { Flexbox } from 'src/components/alignments';
+import Button from 'src/components/button';
+import TextInput from 'src/components/text-input';
 
 const Subscription = (): JSX.Element => {
   const [value, setValue] = useState();
